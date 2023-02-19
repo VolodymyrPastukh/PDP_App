@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">PDP App</string>
+    <string name="deep_link_title">http://pdpapp</string>
+
+    <string name="recipe_country">Country: %1$s</string>
+    <string name="recipe_description">Description: %1$s</string>
+    <string name="recipe_steps_amount">Steps: %1$s</string>
+    <string name="recipe_duration">%1$ssec</string>
+
+    <string name="dialog_downloading_complete_title">Downloading completed!</string>
+    <string name="dialog_downloading_complete_message">Would you like to start live recipe %1$s</string>
+
+    <string name="button_store">Store</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="button_yes">Yes</string>
+</resources>
