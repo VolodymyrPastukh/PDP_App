@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".App"
+        android:name="pastukh.vova.pdpapp.App"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -39,20 +39,20 @@
         </activity>
 
         <service
-            android:name=".services.loading.LoadingService"
+            android:name="pastukh.vova.components.services.loading.LoadingService"
             android:enabled="true"
             android:exported="false" />
         <service
-            android:name=".services.media.LiveRecipeService"
+            android:name="pastukh.vova.components.services.media.LiveRecipeService"
             android:enabled="true"
             android:exported="false" />
 
         <receiver
-            android:name=".receivers.DownloadingInfoReceiver"
+            android:name="pastukh.vova.components.receivers.DownloadingInfoReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.example.pdpapp.RECIPE_DOWNLOADING" />
+                <action android:name="pastukh.vova.pdpapp.RECIPE_DOWNLOADING" />
             </intent-filter>
         </receiver>
     </application>

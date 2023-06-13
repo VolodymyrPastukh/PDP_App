@@ -14,3 +14,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PDP App"
 include(":app")
+include(":modules:data")
+include(":modules:utils")
+include(":modules:components")
