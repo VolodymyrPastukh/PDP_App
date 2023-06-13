@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.pdpapp.ui.screen.splash.SplashFragment"
+        android:name="pastukh.vova.pdpapp.ui.screen.splash.SplashFragment"
         android:label="SplashFragment">
         <action
             android:id="@+id/action_splashFragment_to_recipesFragment"
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/recipesFragment"
-        android:name="com.example.pdpapp.ui.screen.recipes.RecipesFragment"
+        android:name="pastukh.vova.pdpapp.ui.screen.recipes.RecipesFragment"
         android:label="fragment_recipes"
         tools:layout="@layout/fragment_recipes">
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/recipeDetailsFragment"
-        android:name="com.example.pdpapp.ui.screen.recipedetails.RecipeDetailsFragment"
+        android:name="pastukh.vova.pdpapp.ui.screen.recipedetails.RecipeDetailsFragment"
         android:label="RecipeDetailsFragment">
         <argument
             android:name="id"

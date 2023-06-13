@@ -49,6 +49,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":modules:data"))
+    implementation(project(":modules:components"))
+    implementation(project(":modules:utils"))
 
     implementation(Dependencies.Core.coreKtx)
     implementation(Dependencies.Core.material)
@@ -60,12 +63,6 @@ dependencies {
     implementation(Dependencies.Ktx.runtime)
     implementation(Dependencies.Ktx.navigationFragment)
     implementation(Dependencies.Ktx.navigationUi)
-
-    implementation(Dependencies.Server.retrofit)
-    implementation(Dependencies.Server.retrofitJsonConverter)
-    implementation(Dependencies.Server.okkHttp)
-    implementation(Dependencies.Server.okkHttpLoggingInterceptor)
-    implementation(Dependencies.Server.gson)
 
     implementation(Dependencies.DI.koin)
     implementation(Dependencies.DI.koinExt)
