@@ -14,14 +14,13 @@ import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pastukh.vova.baseui.R
+import pastukh.vova.baseui.viewModel.recipeDetails.RecipeDetailsViewModel
+import pastukh.vova.baseui.viewModel.recipeDetails.RecipeDetailsViewState
 import pastukh.vova.components.services.ServiceConstants
 import pastukh.vova.components.services.loading.LoadingService
 import pastukh.vova.components.services.media.LiveRecipeService
-import pastukh.vova.pdpapp.R
 import pastukh.vova.pdpapp.databinding.FragmentRecipeDetailsBinding
-import pastukh.vova.pdpapp.ui.screen.entity.RecipeEntity
-import pastukh.vova.pdpapp.ui.screen.entity.RecipeState
-import pastukh.vova.pdpapp.ui.screen.entity.base.ViewState
 import pastukh.vova.pdpapp.ui.utils.toast
 import pastukh.vova.pdpapp.ui.utils.visibility
 
@@ -54,20 +53,20 @@ class RecipeDetailsFragment : Fragment() {
         viewModel.getRecipe(args.id)
     }
 
-    private fun processState(state: ViewState<RecipeEntity>) = with(binding) {
+    private fun processState(state: RecipeDetailsViewState) = with(binding) {
         when (state) {
-            is ViewState.Data<RecipeEntity> -> {
+            is RecipeDetailsViewState.Data -> {
                 progress.hide()
                 with(state.data) {
                     progressDownloading.hide()
                     when (this.state) {
-                        RecipeState.DOWNLOADED -> iconBtn.iconButtonPlay()
-                        RecipeState.DOWNLOADING -> {
+                        pastukh.vova.baseui.entity.RecipeState.DOWNLOADED -> iconBtn.iconButtonPlay()
+                        pastukh.vova.baseui.entity.RecipeState.DOWNLOADING -> {
                             iconBtn.visibility(false)
                             progressDownloading.show()
                         }
 
-                        RecipeState.DEFAULT -> iconBtn.iconButtonDownload()
+                        pastukh.vova.baseui.entity.RecipeState.DEFAULT -> iconBtn.iconButtonDownload()
                     }
                     Picasso.get().load(image).into(imageIv)
                     titleTv.text = title
@@ -81,8 +80,9 @@ class RecipeDetailsFragment : Fragment() {
                 }
             }
 
-            is ViewState.Error -> requireContext().toast(state.message)
-            is ViewState.Loading -> progress.show()
+            is RecipeDetailsViewState.Error -> requireContext().toast(state.message)
+            is RecipeDetailsViewState.NotFound -> requireContext().toast(R.string.error_not_found)
+            is RecipeDetailsViewState.Loading -> progress.show()
         }
     }
 

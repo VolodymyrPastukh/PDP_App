@@ -13,11 +13,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import pastukh.vova.baseui.viewModel.recipes.RecipesViewModel
+import pastukh.vova.baseui.viewModel.recipes.RecipesViewState
 import pastukh.vova.components.services.ServiceConstants
 import pastukh.vova.components.services.loading.LoadingService
 import pastukh.vova.pdpapp.databinding.FragmentRecipesBinding
-import pastukh.vova.pdpapp.ui.screen.entity.RecipeEntity
-import pastukh.vova.pdpapp.ui.screen.entity.base.ViewState
 import pastukh.vova.pdpapp.ui.screen.recipes.adapter.RecipesAdapter
 import pastukh.vova.pdpapp.ui.utils.toast
 
@@ -61,15 +61,15 @@ class RecipesFragment : Fragment() {
         viewModel.getRecipes()
     }
 
-    private fun processState(state: ViewState<List<RecipeEntity>>) = with(binding) {
+    private fun processState(state: RecipesViewState) = with(binding) {
         when (state) {
-            is ViewState.Data<List<RecipeEntity>> -> {
+            is RecipesViewState.Data -> {
                 progress.hide()
                 adapter.submitList(state.data)
             }
 
-            is ViewState.Error -> requireContext().toast(state.message)
-            is ViewState.Loading -> progress.show()
+            is RecipesViewState.Error -> requireContext().toast(state.message)
+            is RecipesViewState.Loading -> progress.show()
         }
     }
 

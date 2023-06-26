@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:name="pastukh.vova.appcompose.App"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.PDPApp">
+
+        <activity
+            android:name="pastukh.vova.appcompose.ui.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.pdpapp.com"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <service
+            android:name="pastukh.vova.components.services.loading.LoadingService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="pastukh.vova.components.services.media.LiveRecipeService"
+            android:enabled="true"
+            android:exported="false" />
+
+        <receiver
+            android:name="pastukh.vova.components.receivers.DownloadingInfoReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="pastukh.vova.pdpapp.RECIPE_DOWNLOADING" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

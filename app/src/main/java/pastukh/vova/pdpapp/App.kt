@@ -6,6 +6,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
+import pastukh.vova.baseui.moduleBaseUi
 import pastukh.vova.data.moduleData
 import pastukh.vova.utils.moduleUtils
 
@@ -16,7 +17,6 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.d(TAG, "onCreate()")
         Log.d(
             TAG,
             "${BuildConfig.BUILD_TYPE}-${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
@@ -26,7 +26,7 @@ class App : Application() {
             androidLogger(Level.ERROR)
             androidContext(this@App)
             modules(
-                moduleApp,
+                moduleBaseUi,
                 moduleData,
                 moduleUtils
             )

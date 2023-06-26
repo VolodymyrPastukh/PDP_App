@@ -4,8 +4,13 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.widget.Toast
+import pastukh.vova.baseui.R
 
-fun Context.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+fun Context.toast(message: String? = null) =
+    Toast.makeText(this, message ?: getString(R.string.error_unknown), Toast.LENGTH_SHORT).show()
+
+fun Context.toast(stringId: Int? = null) =
+    Toast.makeText(this, getString(stringId ?: R.string.error_unknown), Toast.LENGTH_SHORT).show()
 
 fun Context?.isNetworkAvailable(): Boolean {
     if (this == null) return false

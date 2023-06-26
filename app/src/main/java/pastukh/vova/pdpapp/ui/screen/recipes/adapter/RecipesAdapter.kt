@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
-import pastukh.vova.pdpapp.R
+import pastukh.vova.baseui.R
 import pastukh.vova.pdpapp.databinding.RecipeItemBinding
-import pastukh.vova.pdpapp.ui.screen.entity.RecipeEntity
-import pastukh.vova.pdpapp.ui.screen.entity.RecipeState
+import pastukh.vova.baseui.entity.RecipeEntity
+import pastukh.vova.baseui.entity.RecipeState
 import pastukh.vova.pdpapp.ui.utils.visibility
 
 class RecipesAdapter :

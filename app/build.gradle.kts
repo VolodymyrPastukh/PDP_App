@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":modules:data"))
     implementation(project(":modules:components"))
     implementation(project(":modules:utils"))
+    implementation(project(":modules:baseUi"))
 
     implementation(Dependencies.Core.coreKtx)
     implementation(Dependencies.Core.material)

@@ -18,4 +18,8 @@ object Config {
     object Components{
         const val packageName = "pastukh.vova.components"
     }
+
+    object BaseUi{
+        const val packageName = "pastukh.vova.baseui"
+    }
 }
