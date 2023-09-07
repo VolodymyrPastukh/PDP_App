@@ -26,7 +26,7 @@ class RecipesViewModel(private val _repository: RecipesRepository) : ViewModel()
                     onData = { recipes ->
                         _state.emit(
                             RecipesViewState.Data(
-                                recipes.map { event -> if (event.id == id) event.downloaded() else event }
+                                recipes.map { recipe -> if (recipe.id == id) recipe.downloaded() else recipe }
                             )
                         )
                     }
@@ -50,12 +50,12 @@ class RecipesViewModel(private val _repository: RecipesRepository) : ViewModel()
         }
     }
 
-    fun storeRecipe(id: String) {
+    fun storeRecipe(id: Int) {
         viewModelScope.launch {
             state.value.onState(
                 onData = { recipes ->
                     _state.emit(
-                        RecipesViewState.Data(recipes.map { event -> if (event.id == id) event.downloading() else event })
+                        RecipesViewState.Data(recipes.map { recipe -> if (recipe.id == id) recipe.downloading() else recipe })
                     )
                 }
             )

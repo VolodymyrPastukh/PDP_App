@@ -1,9 +1,9 @@
 package pastukh.vova.baseui.entity
 
 data class RecipeEntity(
-    val id: String,
+    val id: Int,
     val title: String,
-    val image: String,
+    val image: String?,
     val country: String,
     val description: String,
     val steps: List<RecipeStepEntity>,
@@ -11,7 +11,7 @@ data class RecipeEntity(
 ) {
     companion object {
         val TEST = RecipeEntity(
-            id = "",
+            id = 0,
             title = "Holodec",
             image = "",
             country = "Europe",

@@ -38,7 +38,9 @@ class LoadingService : CoroutinesService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         scope.launch {
-            val id = intent?.getStringExtra(ServiceConstants.EXTRA_RECIPE_URL)
+            val id = intent?.getIntExtra(ServiceConstants.EXTRA_RECIPE_URL, -1)
+            if (id != null && id < 0) throw IllegalArgumentException()
+
             Log.i(TAG, "Intent $intent")
             Log.i(TAG, "Flags $flags")
             Log.i(TAG, "StartId $startId")
@@ -48,7 +50,7 @@ class LoadingService : CoroutinesService() {
         return START_REDELIVER_INTENT
     }
 
-    private suspend fun start(id: String?, startId: Int) {
+    private suspend fun start(id: Int?, startId: Int) {
         if (id == null) {
             stopSelf(startId)
             return
@@ -64,8 +66,8 @@ class LoadingService : CoroutinesService() {
             }.launchIn(scope)
     }
 
-    private suspend fun sendBroadcastNotification(id: String) {
-        val stored = _recipesRepository.getRecipe(id).getOrNull()?.title
+    private suspend fun sendBroadcastNotification(id: Int) {
+        val stored = _recipesRepository.getRecipe(id).getOrNull()?.recipe_title
         sendBroadcast(
             Intent(DownloadingInfoReceiver.Constants.ACTION).apply {
                 putExtra(DownloadingInfoReceiver.Constants.Key.ID, id)

@@ -35,8 +35,8 @@ import pastukh.vova.baseui.entity.RecipeState
 fun RecipeListItemView(
     modifier: Modifier = Modifier,
     recipe: RecipeEntity,
-    onRecipeDetails: (String) -> Unit,
-    onDownload: (String) -> Unit,
+    onRecipeDetails: (Int) -> Unit,
+    onDownload: (Int) -> Unit,
 ) {
     Card(
         shape = CardDefaults.elevatedShape,
@@ -66,7 +66,7 @@ fun RecipeListItemView(
             ) {
                 Column {
                     Text(
-                        text = recipe.title ?: "",
+                        text = recipe.title,
                         style = TextStyles.Body1,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -76,7 +76,7 @@ fun RecipeListItemView(
                             .padding(top = 20.dp, end = 52.dp),
                     )
                     Text(
-                        text = recipe.country ?: "",
+                        text = recipe.country,
                         style = TextStyles.Sub1,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
@@ -86,7 +86,7 @@ fun RecipeListItemView(
                             .padding(top = 4.dp)
                     )
                     Text(
-                        text = recipe.description ?: "",
+                        text = recipe.description,
                         style = TextStyles.Sub2,
                         maxLines = 2,
                         overflow = TextOverflow.Ellipsis,

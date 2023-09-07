@@ -41,7 +41,7 @@ class LiveRecipeService : CoroutinesService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         scope.launch {
-            val id = intent?.getStringExtra(EXTRA_RECIPE_URL)
+            val id = intent?.getIntExtra(EXTRA_RECIPE_URL, -1) ?: -1
             Log.i(TAG, "Intent $intent")
             Log.i(TAG, "Flags $flags")
             Log.i(TAG, "StartId $startId")
@@ -51,10 +51,10 @@ class LiveRecipeService : CoroutinesService() {
         return START_STICKY
     }
 
-    private suspend fun start(id: String?) {
+    private suspend fun start(id: Int) {
         delay(1000)
         when {
-            id == null -> recipeNotFound()
+            id < 0 -> recipeNotFound()
             _recipesRepository.getRecipe(id).getOrNull() == null -> recipeNotFound()
             else -> startLiveRecipe(_recipesRepository.getRecipe(id).getOrNull()!!)
         }
@@ -62,14 +62,14 @@ class LiveRecipeService : CoroutinesService() {
 
     private suspend fun startLiveRecipe(recipe: pastukh.vova.data.server.entity.RecipeDTO) =
         with(tss) {
-            withDelay(5000) { read("Starting live recipe ${recipe.title}", recipe.id) }
+            withDelay(5000) { read("Starting live recipe ${recipe.recipe_title}", recipe.id.toString()) }
             recipe.steps.forEach { step ->
-                withDelay(step.durationInMillis) {
-                    read("${step.title} - ${step.instructions}", step.title)
+                withDelay(step.recipe_step_duration_millis) {
+                    read("${step.recipe_step_title} - ${step.recipe_step_instruction}", step.recipe_step_title)
                     waitUntilSpeaking()
                 }
             }
-            withDelay(3000) { read("Congratulations!", recipe.id) }
+            withDelay(3000) { read("Congratulations!", recipe.id.toString()) }
             stopSelf()
         }
 

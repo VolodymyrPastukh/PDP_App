@@ -21,8 +21,8 @@ import pastukh.vova.baseui.viewModel.recipes.RecipesViewState
 @Composable
 fun RecipesContent(
     state: State<RecipesViewState>,
-    onRecipeDetails: (String) -> Unit,
-    onDownload: (String) -> Unit,
+    onRecipeDetails: (Int) -> Unit,
+    onDownload: (Int) -> Unit,
     onReload: () -> Unit,
     onBack: () -> Unit,
 ) {
@@ -34,14 +34,14 @@ fun RecipesContent(
                         .padding(8.dp)
                         .background(color = MaterialTheme.colorScheme.background)
                 ) {
-                    items(data.size, key = { data[it].id }) {
-                        if (it == 0) Spacer(modifier = Modifier.height(8.dp))
+                    items(data.size, key = { data[it].id }) { idx ->
+                        if (idx == 0) Spacer(modifier = Modifier.height(8.dp))
                         RecipeListItemView(
-                            recipe = data[it],
+                            recipe = data[idx],
                             onRecipeDetails = onRecipeDetails,
                             onDownload = onDownload
                         )
-                        if (it != data.size) Spacer(modifier = Modifier.height(8.dp))
+                        if (idx != data.size) Spacer(modifier = Modifier.height(8.dp))
                     }
                 }
             }

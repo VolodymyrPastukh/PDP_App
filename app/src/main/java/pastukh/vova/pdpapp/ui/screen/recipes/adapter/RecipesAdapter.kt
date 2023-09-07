@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import pastukh.vova.baseui.R
-import pastukh.vova.pdpapp.databinding.RecipeItemBinding
 import pastukh.vova.baseui.entity.RecipeEntity
 import pastukh.vova.baseui.entity.RecipeState
+import pastukh.vova.pdpapp.databinding.RecipeItemBinding
 import pastukh.vova.pdpapp.ui.utils.visibility
 
 class RecipesAdapter :
     ListAdapter<RecipeEntity, RecipesAdapter.EventViewHolder>(EventDiffCallback) {
 
-    private var listener: ((String) -> Unit)? = null
-    private var downloadListener: ((String) -> Unit)? = null
+    private var listener: ((Int) -> Unit)? = null
+    private var downloadListener: ((Int) -> Unit)? = null
 
-    fun setClickListener(listener: (String) -> Unit) {
+    fun setClickListener(listener: (Int) -> Unit) {
         this.listener = listener
     }
 
-    fun setDownloadClickListener(listener: (String) -> Unit) {
+    fun setDownloadClickListener(listener: (Int) -> Unit) {
         downloadListener = listener
     }
 
@@ -44,8 +44,8 @@ class RecipesAdapter :
 
     class EventViewHolder(
         private val binding: RecipeItemBinding,
-        private val listener: ((String) -> Unit)?,
-        private val downloadListener: ((String) -> Unit)?,
+        private val listener: ((Int) -> Unit)?,
+        private val downloadListener: ((Int) -> Unit)?,
     ) : ViewHolder(binding.root) {
 
         private val context: Context

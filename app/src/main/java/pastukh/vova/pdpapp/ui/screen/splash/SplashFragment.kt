@@ -23,9 +23,7 @@ class SplashFragment : Fragment() {
         lifecycleScope.launch {
             delay(2000)
             findNavController().navigate(
-                SplashFragmentDirections.actionSplashFragmentToRecipesFragment(
-                    null
-                )
+                SplashFragmentDirections.actionSplashFragmentToRecipesFragment()
             )
         }
     }

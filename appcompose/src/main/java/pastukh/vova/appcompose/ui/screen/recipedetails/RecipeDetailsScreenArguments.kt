@@ -24,7 +24,7 @@ class RecipeDetailsScreenArguments(val data: Data?) {
 
         fun fromBackStack(backStack: NavBackStackEntry): RecipeDetailsScreenArguments {
             val arguments = backStack.arguments?.getString(ARG_DATA_KEY)
-            val deepLinkRecipeId = backStack.arguments?.getString(DEEP_LINK_KEY_ID)
+            val deepLinkRecipeId = backStack.arguments?.getInt(DEEP_LINK_KEY_ID)
             return RecipeDetailsScreenArguments(
                 data = deepLinkRecipeId?.let { Data(deepLinkRecipeId) }
                     ?: arguments?.let {
@@ -39,5 +39,5 @@ class RecipeDetailsScreenArguments(val data: Data?) {
         return "${ROUTE_NAME}/$arguments"
     }
 
-    data class Data(val recipeId: String)
+    data class Data(val recipeId: Int)
 }

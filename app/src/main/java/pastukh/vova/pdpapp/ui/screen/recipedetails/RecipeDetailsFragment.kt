@@ -101,7 +101,7 @@ class RecipeDetailsFragment : Fragment() {
         }
     }
 
-    private fun startLiveRecipe(id: String) {
+    private fun startLiveRecipe(id: Int) {
         requireActivity().startService(
             Intent(requireActivity(), LiveRecipeService::class.java).apply {
                 putExtra(ServiceConstants.EXTRA_RECIPE_URL, id)
@@ -109,7 +109,7 @@ class RecipeDetailsFragment : Fragment() {
         )
     }
 
-    private fun storeRecipeBackground(id: String) {
+    private fun storeRecipeBackground(id: Int) {
         requireActivity().startService(
             Intent(requireActivity(), LoadingService::class.java).apply {
                 putExtra(ServiceConstants.EXTRA_RECIPE_URL, id)

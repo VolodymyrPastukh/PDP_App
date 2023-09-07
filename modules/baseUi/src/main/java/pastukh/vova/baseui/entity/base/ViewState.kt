@@ -17,19 +17,14 @@ suspend inline fun <T> ViewState<T>.onDataState(crossinline block: suspend (T) -
 
 fun <I : Any, O : Any> ResponseResult<I>.mapTo(block: (I) -> O): ResponseResult<O> =
     when (this) {
-        is ResponseResult.Success<I> -> ResponseResult.Success(
-            block(data)
-        )
-
-        is ResponseResult.Error -> ResponseResult.Error(
-            error
-        )
+        is ResponseResult.Success<I> -> ResponseResult.Success(block(data))
+        is ResponseResult.ServerError -> ResponseResult.ServerError(error)
+        is ResponseResult.Error -> ResponseResult.Error(error)
     }
 
 fun <I : Any> ResponseResult<I>.toViewState(): ViewState<I> =
     when (this) {
         is ResponseResult.Success<I> -> ViewState.Data(data)
-        is ResponseResult.Error -> ViewState.Error(
-            error.message ?: "Unknown"
-        )
+        is ResponseResult.ServerError -> ViewState.Error(error ?: "Unknown")
+        is ResponseResult.Error -> ViewState.Error(error.message ?: "Unknown")
     }

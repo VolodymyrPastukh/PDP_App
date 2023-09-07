@@ -41,7 +41,7 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        args.id?.let { navigateToDetailed(it) }
+        args.id.let { navigateToDetailed(it) }
         initView()
     }
 
@@ -73,7 +73,7 @@ class RecipesFragment : Fragment() {
         }
     }
 
-    private fun storeRecipeBackground(id: String) {
+    private fun storeRecipeBackground(id: Int) {
         requireActivity().startService(
             Intent(requireActivity(), LoadingService::class.java).apply {
                 putExtra(ServiceConstants.EXTRA_RECIPE_URL, id)
@@ -81,7 +81,7 @@ class RecipesFragment : Fragment() {
         )
     }
 
-    private fun navigateToDetailed(id: String) {
+    private fun navigateToDetailed(id: Int) {
         findNavController().navigate(
             RecipesFragmentDirections.actionRecipesFragmentToRecipeDetailsFragment(id)
         )

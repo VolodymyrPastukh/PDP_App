@@ -13,7 +13,7 @@ import pastukh.vova.components.services.loading.LoadingService
 @Composable
 fun RecipesScreen(
     arguments: RecipesScreenArguments,
-    onRecipeDetails: (String) -> Unit,
+    onRecipeDetails: (Int) -> Unit,
     viewModel: RecipesViewModel = getViewModel(),
 ) {
     val context = LocalContext.current

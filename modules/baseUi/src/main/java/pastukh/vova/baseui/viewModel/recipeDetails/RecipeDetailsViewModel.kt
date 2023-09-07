@@ -31,7 +31,7 @@ class RecipeDetailsViewModel(private val _repository: pastukh.vova.data.server.r
         }
     }
 
-    fun getRecipe(id: String?) {
+    fun getRecipe(id: Int?) {
         viewModelScope.launch {
             if(id == null){
                 _state.emit(RecipeDetailsViewState.NotFound)
