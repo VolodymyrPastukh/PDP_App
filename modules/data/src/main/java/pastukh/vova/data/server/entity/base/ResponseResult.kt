@@ -6,16 +6,24 @@ import android.util.Log
 sealed class ResponseResult<out T> {
     companion object {
         private const val TAG = "ResponseResult"
+
+        fun <T> fromServerResult(sr: ServerResult<T>): ResponseResult<T> =
+            if (sr.success) sr.result?.let { Success(sr.result) } ?: ServerError(null)
+            else ServerError(sr.message)
     }
 
     data class Success<T : Any>(val data: T) : ResponseResult<T>() {
-        init { Log.i(TAG, "SUCCESS -> $data") }
+        init {
+            Log.i(TAG, "SUCCESS -> $data")
+        }
     }
 
     data class ServerError(val error: String?) : ResponseResult<Nothing>()
 
     data class Error(val error: Exception) : ResponseResult<Nothing>() {
-        init { Log.i(TAG, "ERROR -> ${error.message}|${error.cause}") }
+        init {
+            Log.i(TAG, "ERROR -> ${error.message}|${error.cause}")
+        }
     }
 }
 
