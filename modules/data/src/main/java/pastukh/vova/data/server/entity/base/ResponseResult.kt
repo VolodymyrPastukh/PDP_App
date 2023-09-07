@@ -12,6 +12,8 @@ sealed class ResponseResult<out T> {
         init { Log.i(TAG, "SUCCESS -> $data") }
     }
 
+    data class ServerError(val error: String?) : ResponseResult<Nothing>()
+
     data class Error(val error: Exception) : ResponseResult<Nothing>() {
         init { Log.i(TAG, "ERROR -> ${error.message}|${error.cause}") }
     }
