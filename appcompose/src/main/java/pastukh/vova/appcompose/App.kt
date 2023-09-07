@@ -11,7 +11,7 @@ import pastukh.vova.data.moduleData
 import pastukh.vova.pdpapp.BuildConfig
 import pastukh.vova.utils.moduleUtils
 
-class App: Application() {
+class App : Application() {
     companion object {
         private const val TAG = "App"
     }
@@ -29,7 +29,8 @@ class App: Application() {
             modules(
                 moduleBaseUi,
                 moduleData,
-                moduleUtils
+                moduleUtils,
+                appModule,
             )
         }
     }

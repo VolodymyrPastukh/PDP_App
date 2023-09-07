@@ -9,7 +9,6 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import pastukh.vova.data.dataSource.PreferencesDataSource
 import pastukh.vova.data.server.ServerApi
-import pastukh.vova.data.server.ServerConstants
 import pastukh.vova.data.server.repository.RecipesRepository
 import pastukh.vova.data.server.repository.RecipesRepositoryImpl
 import pastukh.vova.utils.DispatcherToken
@@ -21,7 +20,7 @@ private const val PREFERENCES_NAME = "recipes_preferences"
 val moduleData = module {
     factory { Gson() }
 
-    single { serverApi() }
+    single { serverApi(get(qualifier = named("server_url"))) }
     single { sharedPreferences(get()) }
 
     single { PreferencesDataSource(get(), get()) }
@@ -38,7 +37,7 @@ private fun sharedPreferences(context: Context): SharedPreferences {
     )
 }
 
-private fun serverApi(): ServerApi {
+private fun serverApi(serverUrl: String): ServerApi {
     val okHttpClient = OkHttpClient.Builder().apply {
         if (BuildConfig.DEBUG) addInterceptor(HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -46,7 +45,7 @@ private fun serverApi(): ServerApi {
     }.build()
 
     val retrofit = Retrofit.Builder().client(okHttpClient)
-        .baseUrl(ServerConstants.SERVER_URL)
+        .baseUrl(serverUrl)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

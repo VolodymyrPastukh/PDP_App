@@ -28,7 +28,8 @@ class App : Application() {
             modules(
                 moduleBaseUi,
                 moduleData,
-                moduleUtils
+                moduleUtils,
+                appModule,
             )
         }
     }

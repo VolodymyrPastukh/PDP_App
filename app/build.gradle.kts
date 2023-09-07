@@ -1,8 +1,15 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
     id("androidx.navigation.safeargs.kotlin")
 }
+
+val keystorePropertiesFile = rootProject.file("keys/keystore.properties")
+val keystoreProperties = Properties()
+keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 
 android {
     namespace = Config.packageName
@@ -16,6 +23,18 @@ android {
         versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    flavorDimensions.addAll(listOf("version"))
+    productFlavors {
+        create("prod") {
+            dimension = "version"
+            buildConfigField("String", "SERVER_URL", "\"${keystoreProperties.getProperty("pdp_server_endpoint") as String}\"")
+        }
+        create("dev") {
+            dimension = "version"
+            buildConfigField("String", "SERVER_URL", "\"${keystoreProperties.getProperty("pdp_server_endpoint") as String}\"")
+        }
     }
 
     buildTypes {
